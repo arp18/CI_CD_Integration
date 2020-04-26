@@ -13,11 +13,5 @@ node('ec2-node'){
 	             sh "echo error defining maven test surefire-report:report"
 	  }
 	  }
-	  stage('Testcases and Report'){
-	  try{
-	       echo "Executing test cases"
-		   junit allowEmptyResults: true, testResults: 'addressbook_main/target/surefire-reports/*.xml'
-	  }
-	  }
-
+	 
 }
