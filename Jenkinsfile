@@ -32,5 +32,6 @@ node('ec2-node'){
 	      catch(err){
 		           throw err
 		  }
+		  }
 
 }
