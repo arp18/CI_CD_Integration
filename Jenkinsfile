@@ -23,5 +23,14 @@ node('ec2-node'){
 	     throw err
 	  }
 	  }
+	  stage('Package and generate artifacts'){
+	      try{
+		      sh "$MVNHOME/bin/mvn clean package -Dskiptests=true"
+			  archiveArtifacts allowEmptyArchive: true, artifacts: 'addressbook_main/target/**/*.war', followSymlinks: false
+			  
+	  }
+	      catch(err){
+		           throw err
+		  }
 
 }
