@@ -10,9 +10,18 @@ node('ec2-node'){
 		   sh "$MVNHOME/bin/mvn clean test surefire-report:report"
 	  }
 	  catch(err){
-	             sh "echo error defining maven test "
+	             sh "echo error defining maven test surefire-report:report"
 	  }
 	  }
-	
+	  stage('Testcases and Report'){
+	  try{
+	       echo "Executing test cases"
+		   junit allowEmptyResults: true, testResults: 'addressbook_main/target/surefire-reports/*.xml'
+		   publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'pipeline/addressbook_main/target/site/*.html', reportFiles: 'surefire-report.html', reportName: 'surefire-report.html', reportTitles: ''])
+	  }
+	  catch(err){
+	     throw err
+	  }
+	  }
 
 }
