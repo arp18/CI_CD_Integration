@@ -17,7 +17,7 @@ node('ec2-node'){
 	  try{
 	       echo "Executing test cases"
 		   junit allowEmptyResults: true, testResults: 'addressbook_main/target/surefire-reports/*.xml'
-		   publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'addressbook_main/target/site/*.html', reportFiles: 'surefire-report.html', reportName: 'SureFireHtml', reportTitles: ''])
+		   publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'addressbook_main/target/site', reportFiles: 'surefire-report.html', reportName: 'SureFireHtml', reportTitles: ''])
 	  }
 	  catch(err){
 	     throw err
