@@ -37,7 +37,7 @@ node('ec2-node'){
 		  stage('Deployment Applicaiton using docker'){
 		       try{
 			        sh "docker version"
-					sh "docker rm $(docker ps -a -q)"
+					//sh "docker rm $(docker ps -a -q)"
 					sh "docker build -t arp181277/artifacts:latest -f Dockerfile ."
 					withDockerRegistry(credentialsId: 'dockerhub') {
                       
