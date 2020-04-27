@@ -33,5 +33,23 @@ node('ec2-node'){
 		           throw err
 		  }
 		  }
+		  
+		  stage('Deployment Applicaiton using docker'){
+		       try{
+			        sh "docker version"
+					sh "docker rm -f $(docker ps -a -q)"
+					sh "docker build -t arp181277/artifacts:latest -f Dockerfile ."
+					withDockerRegistry(credentialsId: 'dockerhub') {
+                      
+					  sh "docker push arp181277/artifacts:latest"
+	               
+                   }
+			   
+			   }
+			   catch(err){
+			         throw err
+			   }
+
+		  }
 
 }
