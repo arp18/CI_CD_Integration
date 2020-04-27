@@ -38,7 +38,8 @@ node('ec2-node'){
 		       try{
 			        sh "docker version"
 					//sh "docker rm $(docker ps -a -q)"
-					sh "docker build -t arp181277/artifacts:latest -f Dockerfile ."
+					sh "docker build -t arp181277/artifacts1:latest -f Dockerfile ."
+					sh "docker run -p 8080:8080 -d arp181277/artifacts1:latest"
 					withDockerRegistry(credentialsId: 'dockerhub') {
                       
 					  sh "docker push arp181277/artifacts:latest"
