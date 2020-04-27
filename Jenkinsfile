@@ -38,11 +38,11 @@ node('ec2-node'){
 		       try{
 			        sh "docker version"
 					//sh "docker rm $(docker ps -a -q)"
-					sh "docker build -t arp181277/dep:latest -f Dockerfile ."
-					sh "docker run -p 8080:8080 -d arp181277/dep:latest"
+					sh "docker build -t arp181277/dep1:latest -f Dockerfile ."
+					sh "docker run -p 8090:8080 -d arp181277/dep1:latest"
 					withDockerRegistry(credentialsId: 'dockerhub') {
                       
-					  sh "docker push arp181277/dep:latest"
+					  sh "docker push arp181277/dep1:latest"
 	               
                    }
 			   
@@ -58,7 +58,7 @@ node('ec2-node'){
     
                    sh "aws s3 ls"
                    sh "aws s3 mb s3://paoneartifacts"
-                   sh "aws s3 cp addressbook_main/target/addressbook.war se://paoneartifacts"				   
+                   sh "aws s3 cp addressbook_main/target/addressbook.war s3://paoneartifacts"				   
 			 }
 			 
 			 }
