@@ -52,5 +52,20 @@ node('ec2-node'){
 			   }
 
 		  }
+		  stage('Artifacts to S3'){
+		     try{
+			       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+    
+                   sh "aws s3 ls"
+                   sh "aws s3 mb s3://paoneartifacts"
+                   sh "aws s3 cp addressbook_main/target/addressbook.war se://paoneartifacts"				   
+			 }
+			 
+			 }
+			 catch(err){
+			    sh "echo sending errot to s3"
+			 }
+		  }
+		  
 
 }
